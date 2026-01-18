@@ -9,16 +9,16 @@ first run will do a full compilation of racket because it works by overriding pk
 no dependency resolution.
 instead you have to manually add all dependencies, which use the following format:
 ```nix
-package-format = {
+package = {
   src = fetcherName {...};
   infos = [
     {
       name = "package-name";
-      path = "subdirectory of src" or "" (optional);
+      path = "subdirectory of src" or ""; # optional
     }
     {
       name = "package-name2";
-      path = "subdirectory2 of src" or "" (optional);
+      path = "subdirectory2 of src" or ""; # optional
     }
   ];
   dependencies = [ dep1 dep2 ]
