@@ -1,22 +1,19 @@
 {
   pkgs,
+  fetchgit ? pkgs.fetchgit,
   fetchzip ? pkgs.fetchzip,
   ...
 }:
 rec {
   chk-lib = {
-    src = fetchGit {
-      url = "git@github.com:jeapostrophe/chk";
-      ref = "refs/master";
-      rev = "be74d7bad039141c1c142c0590dead552445b260";
+    src = fetchgit {
+      url = "https://github.com/jeapostrophe/chk";
+      rev = "32fb635e19fa2dc2d9c35bac0964ab76dde1e89e";
+      hash = "sha256-Qlk7FEcHwacXNxDGFpJUEc4bdd05aZjFcv6ijH8IGv0=";
     };
     infos = [
       rec {
         name = "chk-lib";
-        path = name;
-      }
-      rec {
-        name = "chk-doc";
         path = name;
       }
       rec {
@@ -59,16 +56,26 @@ rec {
     ];
   };
 
+  fixw = {
+    src = fetchgit {
+      url = "https://github.com/6cdh/racket-fixw";
+      rev = "b93ec4e13223533b1897e269f2245bad16fe3c45";
+      hash = "sha256-PC+JTSmgz+LSQTasEAKXWidu1bOUroMtBoOeHMgpV5U=";
+    };
+    infos = [ { name = "fixw"; } ];
+  };
+
   racket-langserver = {
-    src = fetchGit {
-      url = "git@github.com:jeapostrophe/racket-langserver";
-      ref = "refs/master";
-      rev = "0bae2361279a7f77f64a039b786f65c7c3029ff7";
+    src = fetchgit {
+      url = "https://github.com/jeapostrophe/racket-langserver";
+      rev = "5cbf431c8e7e62c75b64b7b3a3a672d73daaa5f4";
+      hash = "sha256-79C48QcBSbcEpTYBZGQ4dGMa2h/CCmED9zEVUiQuaZ8=";
     };
     infos = [ { name = "racket-langserver"; } ];
     dependencies = [
       html-parsing
       chk-lib
+      fixw
     ];
   };
 
